@@ -18,11 +18,11 @@ var Colon = createToken({name: "Colon", pattern: /:/});
 var stringLiteralPattern = /"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/
 var StringLiteral = createToken({name: "StringLiteral", pattern: stringLiteralPattern});
 var NumberLiteral = createToken({name: "NumberLiteral", pattern: /-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/});
-var WhiteSpace = createToken({name: "WhiteSpace", pattern: /\s+/, group: ChevrotainLexer.SKIPPED});
+var WhiteSpace = createToken({name: "WhiteSpace", pattern: /\s+/, group: ChevrotainLexer.SKIPPED, line_breaks:true});
 
 var jsonTokens = [WhiteSpace, StringLiteral, NumberLiteral, Comma, Colon, LCurly, RCurly, LSquare, RSquare, True, False, Null];
 // Tracking only the offset provides a small speed boost.
-var ChevJsonLexer = new ChevrotainLexer(jsonTokens, {positionTracking: "onlyOffset"});
+var ChevJsonLexer = new ChevrotainLexer(jsonTokens);
 
 
 // ----------------- parser -----------------

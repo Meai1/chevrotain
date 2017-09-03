@@ -3,14 +3,16 @@ function parse(text) {
     // It seems like these instances must be created anew for each parse.
     var chars = new antlr4.InputStream(text);
     var lexer = new antlr4Json.JSON_ANTLRLexer(chars);
-    var tokens = new antlr4.CommonTokenStream(lexer);
-    var parser = new antlr4Json.JSON_ANTLRParser(tokens);
-    parser.buildParseTrees = false;
+    var tokens = lexer.getAllTokens();
+    // var tokens = new antlr4.CommonTokenStream(lexer);
+    // var parser = new antlr4Json.JSON_ANTLRParser(tokens);
+    // parser.buildParseTrees = false;
+    //
+    // parser._interp.predictionMode = antlr4.atn.PredictionMode.SLL;
 
-    parser._interp.predictionMode = antlr4.atn.PredictionMode.SLL;
-
-    parser.json();
-    if (parser._errHandler.lastErrorIndex !== -1) {
-        throw Error("errors found while parsing with Antlr4");
-    }
+    // parser.json();
+    // if (parser._errHandler.lastErrorIndex !== -1) {
+    //     throw Error("errors found while parsing with Antlr4");
+    // }
+    return tokens
 }
